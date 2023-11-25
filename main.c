@@ -55,6 +55,13 @@ head->next = NULL;
 node * current = head;
 head->circle = newCricle((Color){170,170,170,255},4,0,GetScreenWidth()/2,GetScreenHeight()/2,0.f);
 
+        BeginDrawing();
+        ClearBackground(RAYWHITE);
+        EndDrawing();
+        BeginDrawing();
+        ClearBackground(RAYWHITE);
+        EndDrawing();
+
 
     while (!WindowShouldClose())
     {   
@@ -98,7 +105,7 @@ head->circle = newCricle((Color){170,170,170,255},4,0,GetScreenWidth()/2,GetScre
         current = head;
 
         BeginDrawing();
-        ClearBackground(RAYWHITE);
+        //ClearBackground(RAYWHITE);
         
         DrawCircle(current->circle->x,current->circle->y,current->circle->size,current->circle->color);
 
