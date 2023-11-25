@@ -86,6 +86,8 @@ SetTargetFPS(60);
         /*------Gui s**t-------*/
         GuiColorPicker((Rectangle){20,10,110,110},"select color",&clrpicked);
 
+        clrpicked.a = 255; // for some reason when i use the mingw complier alpha is always zero
+
         GuiToggleSlider((Rectangle){20,(float)GetScreenHeight() - 60,130,20}, "TRACE OFF;TRACE ON", &toggle);                            
         GuiSliderBar((Rectangle){20,(float)GetScreenHeight() - 30,130,20},"","Zoom",&zoomMultF,1.f,300.f);
 

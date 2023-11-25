@@ -13,7 +13,7 @@ file(MAKE_DIRECTORY
   "C:/Users/emire/OneDrive/Desktop/CMuhafiyet/build/_deps/raylib-subbuild/raylib-populate-prefix/src/raylib-populate-stamp"
 )
 
-set(configSubDirs Debug)
+set(configSubDirs )
 foreach(subDir IN LISTS configSubDirs)
     file(MAKE_DIRECTORY "C:/Users/emire/OneDrive/Desktop/CMuhafiyet/build/_deps/raylib-subbuild/raylib-populate-prefix/src/raylib-populate-stamp/${subDir}")
 endforeach()
