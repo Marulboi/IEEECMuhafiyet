@@ -1,3 +1,5 @@
+/***************include requsites****************/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
@@ -6,9 +8,12 @@
 #define RAYGUI_IMPLEMENTATION
 #include "include/raygui.h"
 
+/***************Window size****************/
 #define WINDOW_X 1800
 #define WINDOW_Y 900
 
+
+/****Circle Type****/
 typedef struct Circle{
     Color color;
     float length;
@@ -19,6 +24,8 @@ typedef struct Circle{
 
 }Circle ;
 
+
+/*********Node Type of doubly linked list********/
 typedef struct node {
     Circle* circle;
     struct node * prev;
@@ -26,14 +33,16 @@ typedef struct node {
 } node;
 
 
-
-void appEnd(node **tail_t,Circle* data);
-void delEnd(node **tail);
-void addRandCircle(node** tail);
-Circle* newCricle(Color color, float size,float length, int x,int y,float speed);
+/******Function protypes*********/
+void appEnd(node **tail_t,Circle* data); //add to end of linked list
+void delEnd(node **tail); //delete from end of linked list if it is not the head
+void addRandCircle(node** tail); //add random circle to end of linked list
+Circle* newCricle(Color color, float size,float length, int x,int y,float speed); //Create new circle and returns its pointer
 
 int main(){
 
+
+/******Global variables*****/
 Color clrpicked;
 float Nsize = 10.f;
 float Nlength = 10.f;
@@ -46,16 +55,16 @@ int toggle = 0;
 
 
 float angle = 0.0f;
-node * head = (node *)malloc(sizeof(node));
+node * head = (node *)malloc(sizeof(node));//define head of linked list
 node * tail = head;
 head->prev = NULL;
 head->next = NULL;
 node * current = head;
-
+/*------------------------------------*/
 
 InitWindow(WINDOW_X, WINDOW_Y, "I SPIN YOU RIGHT ROUND BABY RIGHT ROUND");
 
-head->circle = newCricle((Color){170,170,170,255},4,0,GetScreenWidth()/2,GetScreenHeight()/2,0.f);
+head->circle = newCricle((Color){170,170,170,255},4,0,GetScreenWidth()/2,GetScreenHeight()/2,0.f);//give head (:P) a circle at the middle of the screen
 
 
 
@@ -63,7 +72,7 @@ srand(time(NULL));
 
 
 SetTargetFPS(60);
-
+        //clear both buffers
         BeginDrawing();
         ClearBackground(RAYWHITE);
         EndDrawing();
@@ -74,11 +83,16 @@ SetTargetFPS(60);
 
     while (!WindowShouldClose())
     {   
-
+        /*------Gui s**t-------*/
         GuiColorPicker((Rectangle){20,10,110,110},"select color",&clrpicked);
 
-        GuiToggleSlider((Rectangle){20,(float)GetScreenHeight() - 60,110,20}, "TRACE OFF;TRACE ON", &toggle);                            
-        GuiSliderBar((Rectangle){20,(float)GetScreenHeight() - 30,110,20},"","Zoom",&zoomMultF,1.f,300.f);
+        GuiToggleSlider((Rectangle){20,(float)GetScreenHeight() - 60,130,20}, "TRACE OFF;TRACE ON", &toggle);                            
+        GuiSliderBar((Rectangle){20,(float)GetScreenHeight() - 30,130,20},"","Zoom",&zoomMultF,1.f,300.f);
+
+        DrawText("q -> adds random circle \n w -> deletes last circle \n Esc to exit", GetScreenWidth() - 200, 20, 15, LIGHTGRAY);
+
+        DrawText("Trace funcionalty is a bit buggy and will flicker",160,(float)GetScreenHeight() - 57, 15, LIGHTGRAY);
+
 
         GuiSliderBar((Rectangle){20,130,110,20},"","Size",&Nsize,5.f,50.f);
         GuiSliderBar((Rectangle){20,160,110,20},"","Rod Length",&Nlength,5.f,50.f);
@@ -98,7 +112,7 @@ SetTargetFPS(60);
             }
         }
 
-        if(GuiButton((Rectangle){20,(float)GetScreenHeight() - 90,110,20},"Clear Trace")){
+        if(GuiButton((Rectangle){20,(float)GetScreenHeight() - 90,130,20},"Clear Trace")){
             BeginDrawing();
             ClearBackground(RAYWHITE);
             EndDrawing();
@@ -115,16 +129,23 @@ SetTargetFPS(60);
                 }
             }
         }
+        /*-----------------------*/
 
-        zoomMult = zoomMultF/100;
+        current = head; // set current pointer to head
+
+        zoomMult = zoomMultF/100;// this so the zoom slider is smoother
+
+        /*Advance angle if its not bigger than 360 if so go back to zero */
         if(angle>=360.0f){
-            angle = angle + 359.998f;
+            angle = angle - 359.998f;
         }
         else {
             angle += 0.002f;
         }
-        current = head;
 
+
+        
+        /*Drawing part*/
         BeginDrawing();
 
         if(!toggle)ClearBackground(RAYWHITE);
@@ -137,12 +158,13 @@ SetTargetFPS(60);
             }
             current = current->next;
 
-        while(current != NULL){
+        while(current != NULL){     //iterate trough linked list
         
             double endx = (current->circle->length + current->circle->size)*sin(angle*current->circle->speed)*zoomMult;
             double endy = (current->circle->length + current->circle->size)*cos(angle*current->circle->speed)*zoomMult;
-            
+            if(!toggle){
             DrawCircle(current->circle->x, current->circle->y, current->circle->size*zoomMult + 2, BLACK);
+            }
             DrawCircle(current->circle->x, current->circle->y, current->circle->size*zoomMult, current->circle->color);
             if(current->next != NULL){
                 int endendx = (int)(current->circle->x + endx + current->next->circle->size*sin(angle*current->circle->speed)*zoomMult);
@@ -210,7 +232,7 @@ void addRandCircle(node** tail){
     int r = (int)(((float)rand()/(float)(RAND_MAX)) * 255);
             int g = (int)(((float)rand()/(float)(RAND_MAX)) * 255);
             int b = (int)(((float)rand()/(float)(RAND_MAX)) * 255);
-            float size = (((float)rand()/(float)(RAND_MAX)) * 20.f);
+            float size = (((float)rand()/(float)(RAND_MAX)) * 30.f);
             float length = (((float)rand()/(float)(RAND_MAX)) * 10.f + 4.f);
             float speed = (((float)rand()/(float)(RAND_MAX)) * 40.f -20.f);
 
