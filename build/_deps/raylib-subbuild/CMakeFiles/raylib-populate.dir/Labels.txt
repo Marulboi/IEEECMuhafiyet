@@ -1,0 +1,14 @@
+# Target labels
+ raylib-populate
+# Source files and their labels
+C:/Users/emire/OneDrive/Desktop/CMuhafiyet/build/_deps/raylib-subbuild/CMakeFiles/raylib-populate
+C:/Users/emire/OneDrive/Desktop/CMuhafiyet/build/_deps/raylib-subbuild/CMakeFiles/b6b582039ab4f314e9f7078fc39bedc7/raylib-populate.rule
+C:/Users/emire/OneDrive/Desktop/CMuhafiyet/build/_deps/raylib-subbuild/CMakeFiles/2af29ebf94612cc20141c517818efa95/raylib-populate-complete.rule
+C:/Users/emire/OneDrive/Desktop/CMuhafiyet/build/_deps/raylib-subbuild/CMakeFiles/1131b54858bcbb6487bd8976b514acb9/raylib-populate-build.rule
+C:/Users/emire/OneDrive/Desktop/CMuhafiyet/build/_deps/raylib-subbuild/CMakeFiles/1131b54858bcbb6487bd8976b514acb9/raylib-populate-configure.rule
+C:/Users/emire/OneDrive/Desktop/CMuhafiyet/build/_deps/raylib-subbuild/CMakeFiles/1131b54858bcbb6487bd8976b514acb9/raylib-populate-download.rule
+C:/Users/emire/OneDrive/Desktop/CMuhafiyet/build/_deps/raylib-subbuild/CMakeFiles/1131b54858bcbb6487bd8976b514acb9/raylib-populate-install.rule
+C:/Users/emire/OneDrive/Desktop/CMuhafiyet/build/_deps/raylib-subbuild/CMakeFiles/1131b54858bcbb6487bd8976b514acb9/raylib-populate-mkdir.rule
+C:/Users/emire/OneDrive/Desktop/CMuhafiyet/build/_deps/raylib-subbuild/CMakeFiles/1131b54858bcbb6487bd8976b514acb9/raylib-populate-patch.rule
+C:/Users/emire/OneDrive/Desktop/CMuhafiyet/build/_deps/raylib-subbuild/CMakeFiles/1131b54858bcbb6487bd8976b514acb9/raylib-populate-test.rule
+C:/Users/emire/OneDrive/Desktop/CMuhafiyet/build/_deps/raylib-subbuild/CMakeFiles/1131b54858bcbb6487bd8976b514acb9/raylib-populate-update.rule
