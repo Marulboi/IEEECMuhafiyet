@@ -41,19 +41,28 @@ float Nspeed = 3.f;
 float zoomMult = 1.f;
 float zoomMultF = 100.f;
 
+int toggle = 0;
 
 
-srand(time(NULL));
 
-InitWindow(WINDOW_X, WINDOW_Y, "I SPIN YOU RIGHT ROUND BABY RIGHT ROUND");
-SetTargetFPS(60);
 float angle = 0.0f;
 node * head = (node *)malloc(sizeof(node));
 node * tail = head;
 head->prev = NULL;
 head->next = NULL;
 node * current = head;
+
+
+InitWindow(WINDOW_X, WINDOW_Y, "I SPIN YOU RIGHT ROUND BABY RIGHT ROUND");
+
 head->circle = newCricle((Color){170,170,170,255},4,0,GetScreenWidth()/2,GetScreenHeight()/2,0.f);
+
+
+
+srand(time(NULL));
+
+
+SetTargetFPS(60);
 
         BeginDrawing();
         ClearBackground(RAYWHITE);
@@ -67,8 +76,10 @@ head->circle = newCricle((Color){170,170,170,255},4,0,GetScreenWidth()/2,GetScre
     {   
 
         GuiColorPicker((Rectangle){20,10,110,110},"select color",&clrpicked);
-        
-        GuiSliderBar((Rectangle){20,GetScreenHeight() - 30,110,20},"","Zoom",&zoomMultF,1.f,300.f);
+
+        GuiToggleSlider((Rectangle){20,(float)GetScreenHeight() - 60,110,20}, "TRACE OFF;TRACE ON", &toggle);                            
+        GuiSliderBar((Rectangle){20,(float)GetScreenHeight() - 30,110,20},"","Zoom",&zoomMultF,1.f,300.f);
+
         GuiSliderBar((Rectangle){20,130,110,20},"","Size",&Nsize,5.f,50.f);
         GuiSliderBar((Rectangle){20,160,110,20},"","Rod Length",&Nlength,5.f,50.f);
         GuiSliderBar((Rectangle){20,190,110,20},"","Speed",&Nspeed,-30.f,30.f);
@@ -85,6 +96,16 @@ head->circle = newCricle((Color){170,170,170,255},4,0,GetScreenWidth()/2,GetScre
             for(int i = 0; i<5;i++){
             addRandCircle(&tail);
             }
+        }
+
+        if(GuiButton((Rectangle){20,(float)GetScreenHeight() - 90,110,20},"Clear Trace")){
+            BeginDrawing();
+            ClearBackground(RAYWHITE);
+            EndDrawing();
+            BeginDrawing();
+            ClearBackground(RAYWHITE);
+            EndDrawing();
+
         }
 
         if(GuiButton((Rectangle){20,340,130,20},"Remove 5 Circles")){
@@ -105,7 +126,8 @@ head->circle = newCricle((Color){170,170,170,255},4,0,GetScreenWidth()/2,GetScre
         current = head;
 
         BeginDrawing();
-        //ClearBackground(RAYWHITE);
+
+        if(!toggle)ClearBackground(RAYWHITE);
         
         DrawCircle(current->circle->x,current->circle->y,current->circle->size,current->circle->color);
 
@@ -130,17 +152,20 @@ head->circle = newCricle((Color){170,170,170,255},4,0,GetScreenWidth()/2,GetScre
                 DrawLine(current->circle->x,current->circle->y, endendx, endendy ,BLACK);
                 
             }
+
+
             current = current->next;
         }
+
+        EndDrawing();
+
         if(IsKeyPressed(KEY_Q)){
             addRandCircle(&tail);
         }
         if(IsKeyPressed(KEY_W)){
             delEnd(&tail);
         }
-
-
-        EndDrawing();
+        
     }
 
     CloseWindow();
