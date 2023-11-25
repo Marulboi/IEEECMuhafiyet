@@ -1,7 +1,7 @@
-prefix=C:/Program Files (x86)/cmuahfiyet
+prefix=C:/Program Files (x86)/cmuhafiyet
 exec_prefix=${prefix}
-includedir=C:/Program Files (x86)/cmuahfiyet/include
-libdir=C:/Program Files (x86)/cmuahfiyet/lib
+includedir=C:/Program Files (x86)/cmuhafiyet/include
+libdir=C:/Program Files (x86)/cmuhafiyet/lib
 
 Name: GLFW
 Description: A multi-platform library for OpenGL, window and input
