@@ -25,7 +25,7 @@ endif()
 
 # Our Project"${CMAKE_CURRENT_SOURCE_DIR}/include/raygui.h"
 
-add_executable(${PROJECT_NAME} main.c "${CMAKE_CURRENT_SOURCE_DIR}/include/raygui.h")
+add_executable(${PROJECT_NAME} main.c "${CMAKE_CURRENT_SOURCE_DIR}/include/raygui.h" "${CMAKE_CURRENT_SOURCE_DIR}/sandf.h")
 #set(raylib_VERBOSE 1)
 target_link_libraries(${PROJECT_NAME} raylib )
 
