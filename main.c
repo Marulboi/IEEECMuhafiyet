@@ -1,6 +1,6 @@
 /***************include requsites****************/
 
-//#include <stdio.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
 #include "include/raylib.h"
@@ -141,9 +141,8 @@ SetTargetFPS(60);
         
             double endx = (current->circle->length + current->circle->size)*sin(angle*current->circle->speed)*zoomMult;
             double endy = (current->circle->length + current->circle->size)*cos(angle*current->circle->speed)*zoomMult;
-            if(!toggle){
             DrawCircle(current->circle->x, current->circle->y, current->circle->size*zoomMult + 2, BLACK);
-            }
+            
             DrawCircle(current->circle->x, current->circle->y, current->circle->size*zoomMult, current->circle->color);
             if(current->next != NULL){
                 int endendx = (int)(current->circle->x + endx + current->next->circle->size*sin(angle*current->circle->speed)*zoomMult);
@@ -154,9 +153,24 @@ SetTargetFPS(60);
                 
             }
 
-
             current = current->next;
+
+        if(current != NULL && toggle){
+            double endx = (current->circle->length + current->circle->size)*sin((angle + 0.002f)*current->circle->speed)*zoomMult;
+            double endy = (current->circle->length + current->circle->size)*cos((angle + 0.002f)*current->circle->speed)*zoomMult;
+
+            DrawCircle(current->circle->x, current->circle->y, current->circle->size*zoomMult + 2, BLACK);
+            DrawCircle(current->circle->x, current->circle->y, current->circle->size*zoomMult, current->circle->color);
+            if(current->next != NULL){
+                int endendx = (int)(current->circle->x + endx + current->next->circle->size*sin((angle + 0.002f)*current->circle->speed)*zoomMult);
+                int endendy = (int)(current->circle->y + endy + current->next->circle->size*cos((angle + 0.002f)*current->circle->speed)*zoomMult);
+                current->next->circle->x = endendx;
+                current->next->circle->y = endendy;
+                DrawLine(current->circle->x,current->circle->y, endendx, endendy ,BLACK);
+                
+            }
         }
+                    }
 
         EndDrawing();
 
